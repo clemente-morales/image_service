@@ -20,5 +20,6 @@ local.properties
 *.log
 
 # Eclipse
-*.iml
-.idea/workspace.xml
+.classpath
+.project
+.settings/
