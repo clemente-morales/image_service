@@ -11,9 +11,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import mx.com.lania.ImageServiceProperties;
+import mx.com.lania.models.storage.StorageProperties;
+import mx.com.lania.models.storage.StorageService;
 
 @SpringBootApplication
-@EnableConfigurationProperties({ImageServiceProperties.class})
+@EnableConfigurationProperties({ImageServiceProperties.class, StorageProperties.class})
 public class Application {
 	private ImageServiceProperties properties;
 
@@ -25,6 +27,14 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+	}
+	
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+            storageService.deleteAll();
+            storageService.init();
+		};
 	}
 
 	@Bean

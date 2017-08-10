@@ -5,6 +5,7 @@
 bin/
 gen/
 out/
+images/
 
 # Gradle files
 gradlew
