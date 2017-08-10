@@ -19,4 +19,6 @@ public interface StorageService {
 	Resource loadAsResource(String fileName);
 	
 	void deleteAll();
+	
+	byte[] getImageByName(String name);
 }

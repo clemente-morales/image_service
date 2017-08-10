@@ -1,6 +1,7 @@
 package mx.com.lania.models.storage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -86,6 +87,16 @@ public class FileSystemStorageService implements StorageService {
 	@Override
 	public void deleteAll() {
 		FileSystemUtils.deleteRecursively(rootLocation.toFile());
+	}
+
+	@Override
+	public byte[] getImageByName(String fileName) {
+		try {
+			Path file = load(fileName);
+			return Files.readAllBytes(file);
+		} catch (IOException e) {
+			throw new StorageFileNotFoundException("Could not read file" + fileName, e);
+		}
 	}
 
 }
