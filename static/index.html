@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
 <body>
 
-	<form action="/images" method="POST" enctype="multipart/form-data">
-		Select image to upload: 
-			<input type="file" name="file" id="file"> 
-			<input type="submit"
-			value="Upload Image" name="submit">
-	</form>
+<div class="form-style-5">
+<form action="/images" method="POST" enctype="multipart/form-data">
+<fieldset>
+<legend><span class="number">1</span> Photographer Info</legend>
+<input type="text" name="field1" placeholder="Name *">
+<input type="email" name="field2" placeholder="Email *">
+<input type="tel" name="phone" placeholder="Phone *">
+  
+</fieldset>
+
+<fieldset>
+<legend><span class="number">2</span> Photo details</legend>
+
+<input type="file" name="file" value="File" >
+
+<label for="job">Special Notes:</label>
+<textarea name="field3" placeholder="Photo represents..."></textarea>   
+
+
+</fieldset>
+<input type="submit" value="Upload" />
+</form>
+</div>
 
 </body>
 </html>
