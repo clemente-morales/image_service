@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<div class="form-style-5">
-<form action="/images" method="POST" enctype="multipart/form-data">
-<fieldset>
-<legend><span class="number">1</span> Photographer Info</legend>
-<input type="text" name="field1" placeholder="Name *">
-<input type="email" name="field2" placeholder="Email *">
-<input type="tel" name="phone" placeholder="Phone *">
-  
-</fieldset>
+	<div class="main-container">
+		<form action="/images" method="POST" enctype="multipart/form-data">
+			<fieldset>
+				<legend>
+					<span class="number">1</span> Photo details
+				</legend>
+				
+				<label for="photographer">Photographer:</label>
+				<select id="photographer">
+				  <option value="1">Sarath Vadi</option>
+				  <option value="2">Clemente Paollo</option>
+				</select>
+				
+				<label for="category">Category:</label>
+				<select id="category">
+				  <option value="1">Birds</option>
+				</select>				
 
-<fieldset>
-<legend><span class="number">2</span> Photo details</legend>
-
-<input type="file" name="file" value="File" >
-
-<label for="job">Special Notes:</label>
-<textarea name="field3" placeholder="Photo represents..."></textarea>   
+				<label for="file">Image:</label>
+				<input type="file" id="file" name="file" value="File">
+				<br> 
+				<label for="description">Description:</label>
+				<textarea id="description" name="description" placeholder="This photo represents..."></textarea>
 
 
-</fieldset>
-<input type="submit" value="Upload" />
-</form>
-</div>
+			</fieldset>
+			<input type="submit" value="Upload" />
+		</form>
+	</div>
 
 </body>
 </html>
