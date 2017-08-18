@@ -3,6 +3,7 @@ package mx.com.lania.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class Category extends BaseEntity {
 	
 	private String description;
 	
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category", fetch = FetchType.LAZY)
 	private List<Photo> photos;
 
 	public int getId() {
