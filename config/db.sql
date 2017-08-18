@@ -43,6 +43,8 @@ create table photo (
 	PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
-
+# AS a security practice revoke DDL permission from the data base user created for the application
+revoke all on photo_gallery.* from 'chicharron'@'localhost';
+grant select, insert, delete, update on photo_gallery.* to 'chicharron'@'localhost';
 
 
