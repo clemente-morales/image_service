@@ -15,8 +15,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import mx.com.lania.ImageServiceProperties;
-import mx.com.lania.models.storage.StorageProperties;
-import mx.com.lania.models.storage.StorageService;
+import mx.com.lania.domain.storage.StorageProperties;
+import mx.com.lania.domain.storage.StorageService;
 
 @SpringBootApplication
 @EnableConfigurationProperties({ImageServiceProperties.class, StorageProperties.class})

@@ -20,17 +20,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import mx.com.lania.models.storage.StorageFileNotFoundException;
-import mx.com.lania.models.storage.StorageService;
+import mx.com.lania.domain.storage.StorageFileNotFoundException;
+import mx.com.lania.domain.storage.StorageService;
+import mx.com.lania.services.ImageService;
 
 @RestController
 @RequestMapping("/images")
 public class ImageResource {
 	private final StorageService storageService;
+	private final ImageService imageService;
 
 	@Autowired
-	public ImageResource(StorageService storageService) {
+	public ImageResource(StorageService storageService, ImageService imageService) {
 		this.storageService = storageService;
+		this.imageService = imageService;
 	}
 
 	@GetMapping
@@ -54,7 +57,7 @@ public class ImageResource {
 
 	@PostMapping
 	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-		storageService.store(file);
+		imageService.save(file);
 		return ResponseEntity.ok()
 				.body("You successfully uploaded " + file.getOriginalFilename() + "!");
 	}
