@@ -1,14 +1,18 @@
 package mx.com.lania.resources;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.lania.entities.Category;
 import mx.com.lania.repositories.CategoryRepository;
@@ -26,7 +30,10 @@ public class CategoryResource {
 	
 	@GET
 	public List<Category> getAll() {
-		return categoryRepository.findAll().iterator();
+		
+		Stream<Category> stream = StreamSupport.stream(categoryRepository.findAll().spliterator(), false);
+		
+		return stream.collect(Collectors.toList());
 	}
 	
 	@PostMapping
@@ -36,15 +43,5 @@ public class CategoryResource {
 		categoryRepository.save(category);
 		return ResponseEntity.ok()
 				.body("You successfully save your category!");
-	}
-	
-	public static <T> Stream<T> stream(Iterable<T> iterable) {
-	    return StreamSupport.stream(
-	        Spliterators.spliteratorUnknownSize(
-	            iterable.iterator(),
-	            Spliterator.ORDERED
-	        ),
-	        false
-	    );
 	}
 }

@@ -19,7 +19,7 @@ public class Category extends BaseEntity {
 	
 	private String description;
 	
-	@OneToMany(mappedBy="category", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="category", fetch = FetchType.EAGER)
 	private List<Photo> photos;
 
 	public int getId() {
