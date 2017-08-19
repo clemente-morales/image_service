@@ -21,7 +21,7 @@ public class Photographer extends BaseEntity {
 
 	private String phone;
 
-	@OneToMany(mappedBy = "photographer", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "photographer", fetch = FetchType.EAGER)
 	private List<Photo> photos;
 
 	public int getId() {
