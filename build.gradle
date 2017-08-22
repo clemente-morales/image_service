@@ -32,6 +32,7 @@ dependencies {
 	// end::jetty[]
 	
 	compile("org.springframework.boot:spring-boot-starter-jersey")
+	compile group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version: '2.26-b09'
 	
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'mysql:mysql-connector-java'

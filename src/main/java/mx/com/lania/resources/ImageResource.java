@@ -57,7 +57,7 @@ public class ImageResource {
 
 	@PostMapping
 	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-		imageService.save(file);
+		storageService.store(file);
 		return ResponseEntity.ok()
 				.body("You successfully uploaded " + file.getOriginalFilename() + "!");
 	}
