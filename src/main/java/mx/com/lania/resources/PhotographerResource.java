@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -18,6 +20,7 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.com.lania.beans.PhotographerBean;
 import mx.com.lania.entities.Photographer;
 import mx.com.lania.repositories.PhotographerRepository;
 
@@ -40,7 +43,7 @@ public class PhotographerResource {
 		Stream<Photographer> stream = StreamSupport.stream(photographerRepository.findAll().spliterator(), false);
 		return stream.collect(Collectors.toList());
 	}
-	
+
 	@GET
 	@Path("{id}")
 	public Photographer getById(@PathParam("id") int id) {
@@ -53,5 +56,17 @@ public class PhotographerResource {
 		URI location = uriInfo.getAbsolutePathBuilder().path("{id}").resolveTemplate("id", category.getId()).build();
 
 		return Response.created(location).build();
+	}
+
+	@Consumes("application/x-www-form-urlencoded")
+	@PUT
+	public Response saveForm(@BeanParam PhotographerBean photographerBean) {
+		Photographer photographer = new Photographer();
+		photographer.setActive(true);
+		photographer.setName(photographerBean.getName());
+		photographer.setEmail(photographerBean.getEmail());
+		photographer.setPhone(photographerBean.getPhone());
+
+		return save(photographer);
 	}
 }
