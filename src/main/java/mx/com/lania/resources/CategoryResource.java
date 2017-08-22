@@ -2,10 +2,13 @@ package mx.com.lania.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -18,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.com.lania.beans.CategoryBean;
 import mx.com.lania.entities.Category;
 import mx.com.lania.repositories.CategoryRepository;
 
@@ -48,6 +52,25 @@ public class CategoryResource {
 	public Category getById(@PathParam("id") int id) {
 		return categoryRepository.findOne(id);
 	}
+	
+	
+	@Consumes("application/x-www-form-urlencoded")
+	@PUT
+	public Response saveForm(@BeanParam CategoryBean categoryBean) {
+		
+		Stream<Category> stream = StreamSupport.stream(categoryRepository.findAll().spliterator(), false);
+		OptionalInt optionalId = stream.mapToInt(category-> category.getId()).max();
+		
+		int id = optionalId.orElse(0);
+	
+		Category category = new Category();
+		category.setActive(true);
+		category.setDescription(categoryBean.getDescription());
+		category.setName(categoryBean.getName());
+		category.setId(++id);
+		return save(category);
+	}
+	
 
 	@PUT
 	public Response save(Category category) {
