@@ -1,7 +1,5 @@
 package mx.com.lania.services;
 
-import java.nio.file.Path;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +36,8 @@ public class ImageService {
 		photo.setDescription(photoBean.getDescription());
 		photo.setName(photoBean.getName());
 		photo.setImagePath(photoBean.getFile().getOriginalFilename());
-
-		return 0;
+		photoRepository.save(photo);
+		
+		return photo.getId();
 	}
 }
