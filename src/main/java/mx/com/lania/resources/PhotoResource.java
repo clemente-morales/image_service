@@ -48,8 +48,8 @@ public class PhotoResource {
 	}
 	
 	@GET
-	@Path("photographer/{id}")
-	public List<Photo> findByPhotographerId(@PathParam("id") int photographerId) {
+	@Path("photographer/{photographerId}")
+	public List<Photo> findByPhotographerId(@PathParam("photographerId") int photographerId) {
 		return imageService.findByPhotographerId(photographerId);
 	}
 

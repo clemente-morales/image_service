@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.com.lania.beans.PhotographerBean;
+import mx.com.lania.entities.Photo;
 import mx.com.lania.entities.Photographer;
 import mx.com.lania.repositories.PhotographerRepository;
 import mx.com.lania.services.ImageService;
@@ -52,6 +53,12 @@ public class PhotographerResource {
 	@Path("{id}")
 	public Photographer getById(@PathParam("id") int id) {
 		return photographerRepository.findOne(id);
+	}
+	
+	@GET
+	@Path("{id}/photos")
+	public List<Photo> getAllImagesByPhotographer(@PathParam("id") int id) {
+		return imageService.findByPhotographerId(id);
 	}
 	
 	@GET
