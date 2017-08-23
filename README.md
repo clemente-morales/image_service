@@ -1,8 +1,17 @@
 # Image Service
 Service to upload and download images using gradle, Spring boot, Jersey, JPA, and mysql
 
-# Running the service
-Open a terminal, navigate to the project and execute the command:
+# Deploying and Running the service
+
+## Create data base
+
+Execute script config/db.sql in mysql local instance
+
+## Compile and Deploy
+
+Open the file config/application.properties and update the property the property spring.datasource.password with the password created for the user 'chicharron' 
+
+Open a terminal, navigate to the project and execute the following command:
 ```java
 gradle build && java -jar [buildPath]\builds\libs\imageService-0.0.1-SNAPSHOT.jar
 ```

@@ -2,7 +2,7 @@
 create database photo_gallery;
 
 # Create user chicharron and give all privileges to photo_gallery
-grant all privileges on photo_gallery.* to 'chicharron'@'localhost' identified by "ch1ch4rr0n";
+grant all privileges on photo_gallery.* to 'chicharron'@'localhost' identified by "someSecurePassword";
 
 # Create table to save categories
 create table category (
