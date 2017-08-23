@@ -1,5 +1,5 @@
 # Image Service
-Service to upload and download images using gradle, Spring boot, Jersey, JPA, and mysql
+Service to allow photographers to share their work using REST API. The project is created using gradle, jetty, Spring boot, Jersey, Spring Data JPA, and mysql
 
 # Deploying and Running the service
 
