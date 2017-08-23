@@ -36,7 +36,7 @@ public class FileSystemStorageService implements StorageService {
 	}
 
 	@Override
-	public void store(MultipartFile file) {
+	public void store(int photographer, MultipartFile file) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
 		try {
@@ -46,8 +46,10 @@ public class FileSystemStorageService implements StorageService {
 			if (fileName.contains(".."))
 				throw new StorageException(
 						"Cannot store file with relative path outside current directory " + fileName);
+			
+			Path filePath = this.rootLocation.resolve(Integer.toString(photographer)).resolve(fileName);
 
-			Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			throw new StorageException("Failed to store file" + fileName, e);
 		}
@@ -64,14 +66,14 @@ public class FileSystemStorageService implements StorageService {
 	}
 
 	@Override
-	public Path load(String fileName) {
-		return rootLocation.resolve(fileName);
+	public Path load(int photographerId, String fileName) {
+		return rootLocation.resolve(Integer.toString(photographerId)).resolve(fileName);
 	}
 
 	@Override
-	public Resource loadAsResource(String fileName) {
+	public Resource loadAsResource(int photographerId, String fileName) {
 		try {
-			Path file = load(fileName);
+			Path file = load(photographerId, fileName);
 			Resource resource = new UrlResource(file.toUri());
 			if (resource.exists() || resource.isReadable())
 				return resource;
@@ -89,9 +91,9 @@ public class FileSystemStorageService implements StorageService {
 	}
 
 	@Override
-	public byte[] getImageByName(String fileName) {
+	public byte[] getImageByName(int photographerId, String fileName) {
 		try {
-			Path file = load(fileName);
+			Path file = load(photographerId, fileName);
 			return Files.readAllBytes(file);
 		} catch (IOException e) {
 			throw new StorageFileNotFoundException("Could not read file" + fileName, e);

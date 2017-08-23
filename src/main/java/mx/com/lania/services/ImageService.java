@@ -27,7 +27,7 @@ public class ImageService {
 	}
 
 	public int save(PhotoBean photoBean) {
-		storageService.store(photoBean.getFile());
+		storageService.store(photoBean.getPhotographer(), photoBean.getFile());
 
 		Photo photo = new Photo();
 		photo.setActive(true);

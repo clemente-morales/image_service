@@ -52,12 +52,12 @@ public class ImageResource {
 	public ResponseEntity<byte[]> getImage(@PathVariable String imageName) {
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_PNG);
-		return new ResponseEntity<byte[]>(storageService.getImageByName(imageName), headers, HttpStatus.CREATED);
+		return new ResponseEntity<byte[]>(storageService.getImageByName(0, imageName), headers, HttpStatus.CREATED);
 	}
 
 	@PostMapping
 	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-		storageService.store(file);
+		storageService.store(0, file);
 		return ResponseEntity.ok()
 				.body("You successfully uploaded " + file.getOriginalFilename() + "!");
 	}
