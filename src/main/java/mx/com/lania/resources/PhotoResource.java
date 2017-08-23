@@ -46,6 +46,12 @@ public class PhotoResource {
 		Stream<Photo> stream = StreamSupport.stream(photoRepository.findAll().spliterator(), false);
 		return stream.collect(Collectors.toList());
 	}
+	
+	@GET
+	@Path("photographer/{id}")
+	public List<Photo> findByPhotographerId(@PathParam("id") int photographerId) {
+		return imageService.findByPhotographerId(photographerId);
+	}
 
 	@GET
 	@Path("{id}")

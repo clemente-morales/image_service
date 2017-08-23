@@ -1,5 +1,10 @@
 package mx.com.lania.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +44,15 @@ public class ImageService {
 		photoRepository.save(photo);
 		
 		return photo.getId();
+	}
+
+	public List<Photo> findByPhotographerId(int photographerId) {
+		List<Photo> result = new ArrayList<>();
+		
+		try (Stream<Photo> photos = photoRepository.findByPhotographerId(photographerId)) {
+			result = photos.collect(Collectors.toList());
+		}
+
+		return result;
 	}
 }
