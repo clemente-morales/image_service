@@ -23,19 +23,23 @@ import org.springframework.stereotype.Component;
 import mx.com.lania.beans.PhotographerBean;
 import mx.com.lania.entities.Photographer;
 import mx.com.lania.repositories.PhotographerRepository;
+import mx.com.lania.services.ImageService;
+import mx.com.lania.tos.Picture;
 
 @Component
 @Path("/photographers")
 @Produces("application/json")
 public class PhotographerResource {
 	private PhotographerRepository photographerRepository;
+	private ImageService imageService;
 
 	@Context
 	private UriInfo uriInfo;
 
 	@Autowired
-	public PhotographerResource(PhotographerRepository photographerRepository) {
+	public PhotographerResource(PhotographerRepository photographerRepository, ImageService imageService) {
 		this.photographerRepository = photographerRepository;
+		this.imageService = imageService;
 	}
 
 	@GET
@@ -48,6 +52,14 @@ public class PhotographerResource {
 	@Path("{id}")
 	public Photographer getById(@PathParam("id") int id) {
 		return photographerRepository.findOne(id);
+	}
+	
+	@GET
+	@Path("{photographerId}/photos/{imageName}")
+	@Produces("image/*")
+	public Response getPhoto(@PathParam("photographerId") int photographerId, @PathParam("imageName") String imageName) {
+		Picture image = imageService.getPhoto(photographerId, imageName);
+		return Response.ok(image.getImage(), image.getMimeType()).build();
 	}
 
 	@PUT

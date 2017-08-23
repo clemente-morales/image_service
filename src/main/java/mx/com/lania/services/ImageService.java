@@ -1,9 +1,12 @@
 package mx.com.lania.services;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.activation.MimetypesFileTypeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import mx.com.lania.entities.Photo;
 import mx.com.lania.repositories.CategoryRepository;
 import mx.com.lania.repositories.PhotoRepository;
 import mx.com.lania.repositories.PhotographerRepository;
+import mx.com.lania.tos.Picture;
 
 @Service
 public class ImageService {
@@ -54,5 +58,14 @@ public class ImageService {
 		}
 
 		return result;
+	}
+
+	public Picture getPhoto(int photographerId, String imageName) {
+		
+		Path imagePath = storageService.load(photographerId, imageName);
+		String mimeType = new MimetypesFileTypeMap().getContentType(imagePath.toFile());
+		byte[] image = storageService.getImageByName(photographerId, imageName);
+		
+		return new Picture(mimeType, image);
 	}
 }
