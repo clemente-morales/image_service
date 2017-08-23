@@ -25,6 +25,11 @@ gradle build && java -jar [buildPath]\builds\libs\imageService-0.0.1-SNAPSHOT.ja
 http://localhost:8080/photos
 
 
+### Get All Images matching like a name
+
+http://localhost:8080/photos?nameLike={value}
+
+
 ### Get image by Id
 
 http://localhost:8080/photos/{id}
