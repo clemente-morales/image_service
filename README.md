@@ -35,6 +35,6 @@ http://localhost:8080/photographers/{photographerId}/photos
 
 Open a browser and type
  
-localhost:8080
+http://localhost:8080
 
 Once the form is displayed, input the required information and upload a picture from the file system.
