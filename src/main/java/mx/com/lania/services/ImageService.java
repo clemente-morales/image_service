@@ -36,7 +36,8 @@ public class ImageService {
 	}
 
 	public int save(PhotoBean photoBean) {
-		storageService.store(photoBean.getPhotographer(), photoBean.getFile());
+		storageService.store(photoBean.getPhotographer(), photoBean.getFile(), 
+				photoBean.getContentdisposition().getFileName());
 
 		Photo photo = new Photo();
 		photo.setActive(true);
@@ -44,7 +45,7 @@ public class ImageService {
 		photo.setPhotographer(photographerRepository.findOne(photoBean.getPhotographer()));
 		photo.setDescription(photoBean.getDescription());
 		photo.setName(photoBean.getName());
-		photo.setImagePath(photoBean.getFile().getOriginalFilename());
+		photo.setImagePath(photoBean.getContentdisposition().getFileName());
 		photoRepository.save(photo);
 		
 		return photo.getId();

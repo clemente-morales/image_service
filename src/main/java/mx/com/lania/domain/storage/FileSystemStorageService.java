@@ -1,6 +1,7 @@
 package mx.com.lania.domain.storage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,8 +14,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileSystemStorageService implements StorageService {
@@ -36,20 +35,22 @@ public class FileSystemStorageService implements StorageService {
 	}
 
 	@Override
-	public void store(int photographer, MultipartFile file) {
-		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
+	public void store(int photographerId, InputStream file, String fileName) {
 		try {
-			if (file.isEmpty())
+			if (file == null)
 				throw new StorageException("Failed to store empty file" + fileName);
 
 			if (fileName.contains(".."))
 				throw new StorageException(
 						"Cannot store file with relative path outside current directory " + fileName);
 			
-			Path filePath = this.rootLocation.resolve(Integer.toString(photographer)).resolve(fileName);
+			Path photographerDirectory = this.rootLocation.resolve(Integer.toString(photographerId));
+			if (Files.notExists(photographerDirectory))
+				Files.createDirectory(photographerDirectory);
+			
+			Path filePath = photographerDirectory.resolve(fileName);
 
-			Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(file, filePath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			throw new StorageException("Failed to store file" + fileName, e);
 		}

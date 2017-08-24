@@ -9,12 +9,13 @@ import java.util.stream.StreamSupport;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -49,7 +50,8 @@ public class PhotoResource {
 	}
 	
 	@GET
-	public List<Photo> getAllByNameLike(@QueryParam("nameLike") String name) {
+	@Path("like/{name}")
+	public List<Photo> getAllByNameLike(@PathParam("name") String name) {
 		Stream<Photo> stream = StreamSupport.stream(photoRepository.findByNameLike(name).spliterator(), false);
 		return stream.collect(Collectors.toList());
 	}
@@ -72,8 +74,8 @@ public class PhotoResource {
 		return publishSavingResult(photo.getId());
 	}
 
-	@Consumes("multipart/form-data")
-	@PUT
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@POST
 	public Response saveForm(@BeanParam PhotoBean photoBean) {
 		int id = imageService.save(photoBean);
 		return publishSavingResult(id);

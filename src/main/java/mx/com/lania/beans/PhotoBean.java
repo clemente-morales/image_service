@@ -1,7 +1,9 @@
 package mx.com.lania.beans;
 
+import java.io.InputStream;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoBean {
 	@FormDataParam("photographer") 
@@ -13,7 +15,10 @@ public class PhotoBean {
 	
 	
 	@FormDataParam("file") 
-	private MultipartFile file;
+	private InputStream file;
+	
+	@FormDataParam("file") 
+	private FormDataContentDisposition contentdisposition;
 	
 	@FormDataParam("name") 
 	private String name;
@@ -39,14 +44,6 @@ public class PhotoBean {
 		this.category = category;
 	}
 
-	public MultipartFile getFile() {
-		return file;
-	}
-
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -64,6 +61,24 @@ public class PhotoBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+
+	public InputStream getFile() {
+		return file;
+	}
+
+
+	public void setFile(InputStream file) {
+		this.file = file;
+	}
+
+
+	public FormDataContentDisposition getContentdisposition() {
+		return contentdisposition;
+	}
+
+
+	public void setContentdisposition(FormDataContentDisposition contentdisposition) {
+		this.contentdisposition = contentdisposition;
+	}
 }

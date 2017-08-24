@@ -2,6 +2,7 @@ package mx.com.lania;
 
 import javax.ws.rs.ApplicationPath;
 
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,5 +17,6 @@ public class JerseyConfig extends ResourceConfig {
 		register(CategoryResource.class);
 		register(PhotographerResource.class);
 		register(PhotoResource.class);
+		register(MultiPartFeature.class);
 	}
 }

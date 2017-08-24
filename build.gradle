@@ -32,14 +32,11 @@ dependencies {
 	// end::jetty[]
 	
 	compile("org.springframework.boot:spring-boot-starter-jersey")
-	compile group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version: '2.26-b09'
+	compile group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version: '2.25.1'
+	compile group: 'org.glassfish.jersey', name: 'jersey-bom', version: '2.25.1'
 	
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'mysql:mysql-connector-java'
-	
-    // tag::actuator[]
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    // end::actuator[]
 	
     testCompile("junit:junit")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
