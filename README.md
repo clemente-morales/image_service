@@ -22,27 +22,27 @@ gradle build && java -jar [buildPath]\builds\libs\imageService-0.0.1-SNAPSHOT.ja
 
 ### Get all existing images
 
-http://localhost:8080/photos
+http://localhost:8080/photo_gallery/photos
 
 
 ### Get All Images matching like a name
 
-http://localhost:8080/photos?nameLike={value}
+http://localhost:8080/photo_gallery/photos/like/{name}
 
 
 ### Get image by Id
 
-http://localhost:8080/photos/{id}
+http://localhost:8080/photo_gallery/photos/{id}
 
 
 ### Get Image by a photographer
 
-http://localhost:8080/photographers/{photographerId}/photos/{imageName}
+http://localhost:8080/photo_gallery/photographers/{photographerId}/photos/{imageName}
 
 
 ### Get All Images by a photographer
 
-http://localhost:8080/photographers/{photographerId}/photos
+http://localhost:8080/photo_gallery/photographers/{photographerId}/photos
 
 
 ### Uploading a picture
