@@ -19,6 +19,7 @@ local.properties
 
 # Log Files
 *.log
+/logs
 
 # Eclipse
 .classpath

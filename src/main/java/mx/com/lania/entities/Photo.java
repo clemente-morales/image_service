@@ -26,6 +26,7 @@ public class Photo extends BaseEntity {
 	@JsonBackReference
 	private Photographer photographer;
 
+	@JoinColumn(name = "name")
 	private String name;
 
 	@Column(name = "image_path")

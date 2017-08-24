@@ -55,7 +55,8 @@ public class PhotoResource {
 	@Path("like/{name}")
 	@Transactional
 	public List<Photo> getAllByNameLike(@PathParam("name") String name) {
-		Stream<Photo> stream = StreamSupport.stream(photoRepository.findByNameLike(name).spliterator(), false);
+		String value = String.format("%%%s%%", name);
+		Stream<Photo> stream = StreamSupport.stream(photoRepository.findByNameLike(value).spliterator(), false);
 		return stream.collect(Collectors.toList());
 	}
 	
