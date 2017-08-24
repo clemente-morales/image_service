@@ -46,7 +46,7 @@ public class FileSystemStorageService implements StorageService {
 			
 			Path photographerDirectory = this.rootLocation.resolve(Integer.toString(photographerId));
 			if (Files.notExists(photographerDirectory))
-				Files.createDirectory(photographerDirectory);
+				Files.createDirectories(photographerDirectory);
 			
 			Path filePath = photographerDirectory.resolve(fileName);
 
