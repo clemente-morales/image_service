@@ -9,7 +9,7 @@ import java.util.stream.StreamSupport;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,7 +71,7 @@ public class PhotographerResource {
 		return Response.ok(image.getImage(), image.getMimeType()).build();
 	}
 
-	@PUT
+	@POST
 	public Response save(Photographer category) {
 		photographerRepository.save(category);
 		URI location = uriInfo.getAbsolutePathBuilder().path("{id}").resolveTemplate("id", category.getId()).build();
@@ -80,7 +80,7 @@ public class PhotographerResource {
 	}
 
 	@Consumes("application/x-www-form-urlencoded")
-	@PUT
+	@POST
 	public Response saveForm(@BeanParam PhotographerBean photographerBean) {
 		Photographer photographer = new Photographer();
 		photographer.setActive(true);
