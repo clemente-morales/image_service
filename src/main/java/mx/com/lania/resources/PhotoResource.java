@@ -27,6 +27,7 @@ import mx.com.lania.beans.PhotoBean;
 import mx.com.lania.entities.Photo;
 import mx.com.lania.repositories.PhotoRepository;
 import mx.com.lania.services.ImageService;
+import mx.com.lania.tos.Picture;
 
 @Component
 @Path("/photos")
@@ -66,8 +67,17 @@ public class PhotoResource {
 
 	@GET
 	@Path("{id}")
-	public Photo getById(@PathParam("id") int id) {
+	public Photo getPhotoById(@PathParam("id") int id) {
 		return photoRepository.findOne(id);
+	}
+	
+	@GET
+	@Path("{id}")
+	@Produces("image/*")
+	public Response getImageById(@PathParam("id") int id) {
+		Photo photo = photoRepository.findOne(id);
+		Picture image = imageService.getPhoto(photo.getPhotographer().getId(), photo.getImagePath());
+		return Response.ok(image.getImage(), image.getMimeType()).build();
 	}
 
 	@PUT
