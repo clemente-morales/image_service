@@ -19,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import mx.com.lania.beans.PhotographerBean;
 import mx.com.lania.entities.Photo;
@@ -57,6 +58,7 @@ public class PhotographerResource {
 	
 	@GET
 	@Path("{id}/photos")
+	@Transactional
 	public List<Photo> getAllImagesByPhotographer(@PathParam("id") int id) {
 		return imageService.findByPhotographerId(id);
 	}

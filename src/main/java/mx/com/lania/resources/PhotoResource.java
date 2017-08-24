@@ -21,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import mx.com.lania.beans.PhotoBean;
 import mx.com.lania.entities.Photo;
@@ -51,6 +52,7 @@ public class PhotoResource {
 	
 	@GET
 	@Path("like/{name}")
+	@Transactional
 	public List<Photo> getAllByNameLike(@PathParam("name") String name) {
 		Stream<Photo> stream = StreamSupport.stream(photoRepository.findByNameLike(name).spliterator(), false);
 		return stream.collect(Collectors.toList());

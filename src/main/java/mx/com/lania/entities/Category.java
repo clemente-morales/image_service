@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Category extends BaseEntity {
 	@Id
@@ -17,6 +19,7 @@ public class Category extends BaseEntity {
 	private String description;
 	
 	@OneToMany(mappedBy="category", fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private List<Photo> photos;
 
 	public int getId() {

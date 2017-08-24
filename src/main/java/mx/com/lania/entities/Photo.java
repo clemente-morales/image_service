@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Photo extends BaseEntity {
 	@Id
@@ -16,10 +18,12 @@ public class Photo extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
+	@JsonBackReference
 	private Category category;
 	
 	@ManyToOne
 	@JoinColumn(name = "photographer_id")
+	@JsonBackReference
 	private Photographer photographer;
 
 	private String name;
